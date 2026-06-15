@@ -1,0 +1,325 @@
+/* --- Design System & CSS Variables --- */
+:root {
+  /* Color Palette - Dark Premium Theme */
+  --bg-primary: hsl(224, 71%, 4%);
+  --bg-secondary: hsla(224, 71%, 8%, 0.55);
+  --border-glass: hsla(217, 30%, 60%, 0.15);
+  --border-glass-hover: hsla(38, 92%, 50%, 0.3);
+  
+  /* Status/Accent Colors */
+  --color-warning: hsl(38, 92%, 50%);
+  --color-warning-glow: hsla(38, 92%, 50%, 0.15);
+  --color-accent: hsl(263, 70%, 55%);
+  --color-accent-glow: hsla(263, 70%, 55%, 0.25);
+  
+  /* Typography Colors */
+  --text-primary: hsl(0, 0%, 98%);
+  --text-muted: hsl(215, 20%, 65%);
+  --text-link-hover: hsl(38, 92%, 50%);
+
+  /* Font Families */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --- Base Styles --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: clip; /* Avoid scrollbars on viewport boundaries */
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: grid;
+  place-content: center;
+  min-block-size: 100dvh;
+  position: relative;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Dynamic Background Gradients --- */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, var(--color-accent-glow) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, var(--color-warning-glow) 0%, transparent 45%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(hsla(0, 0%, 100%, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* --- Container & Layout --- */
+.container {
+  position: relative;
+  z-index: 10;
+  padding: 1.5rem;
+  display: grid;
+  place-items: center;
+  inline-size: min(100% - 2rem, 540px);
+  animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Glassmorphic Card --- */
+.card {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: float 8s ease-in-out infinite;
+}
+
+.card:hover {
+  border-color: var(--border-glass-hover);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px hsla(38, 92%, 50%, 0.05),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+/* --- Animated Meter Graphic (SVG) --- */
+.meter-icon {
+  position: relative;
+  inline-size: 100px;
+  block-size: 100px;
+  display: grid;
+  place-items: center;
+}
+
+.beacon {
+  position: absolute;
+  inline-size: 80px;
+  block-size: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-warning-glow) 0%, transparent 70%);
+  animation: beaconPulse 2.5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.meter-svg {
+  inline-size: 100%;
+  block-size: 100%;
+  transform: rotate(-90deg);
+}
+
+.meter-bg {
+  fill: none;
+  stroke: hsla(215, 20%, 65%, 0.1);
+  stroke-width: 6;
+}
+
+.meter-fill {
+  fill: none;
+  stroke: var(--color-warning);
+  stroke-width: 6;
+  stroke-dasharray: 251.2; /* 2 * PI * r (r=40) */
+  stroke-dashoffset: 251.2;
+  stroke-linecap: round;
+  animation: fillMeter 1.8s cubic-bezier(0.65, 0, 0.35, 1) 0.5s forwards;
+}
+
+.warning-indicator {
+  position: absolute;
+  color: var(--color-warning);
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: warningWiggle 1s ease-in-out infinite alternate;
+}
+
+/* --- Typography --- */
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5cqi, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.title span.highlight {
+  background: linear-gradient(135deg, hsl(38, 92%, 50%) 0%, hsl(15, 90%, 55%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--color-warning);
+}
+
+.inline-link {
+  color: var(--color-warning);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  font-weight: 700;
+}
+
+.inline-link:hover, .inline-link:focus-visible {
+  color: var(--text-primary);
+  text-shadow: 0 0 10px hsla(38, 92%, 50%, 0.4);
+  outline: none;
+}
+
+.inline-link:focus-visible {
+  outline: 2px solid var(--color-warning);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  max-inline-size: 90%;
+  margin-block-start: -0.5rem;
+}
+
+/* --- Premium Link / CTA Button --- */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.cta-button:hover, .cta-button:focus-visible {
+  border-color: var(--color-warning);
+  color: var(--text-link-hover);
+  background: hsla(38, 92%, 50%, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px hsla(38, 92%, 50%, 0.15);
+  outline: none;
+}
+
+.cta-button:focus-visible {
+  outline: 2px solid var(--color-warning);
+  outline-offset: 4px;
+}
+
+.cta-button svg {
+  inline-size: 16px;
+  block-size: 16px;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover svg {
+  transform: translateX(4px);
+}
+
+/* --- Footer Info --- */
+.footer-text {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: hsla(215, 20%, 65%, 0.4);
+  margin-block-start: 1rem;
+}
+
+/* --- Animations --- */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes beaconPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+}
+
+@keyframes fillMeter {
+  to {
+    stroke-dashoffset: 75.36; /* 70% filled (251.2 * 0.3) */
+  }
+}
+
+@keyframes warningWiggle {
+  from {
+    transform: rotate(-3deg);
+  }
+  to {
+    transform: rotate(3deg);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 480px) {
+  .card {
+    padding: 2.5rem 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.65rem;
+  }
+}
