@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>API Limit Reached - WhichBandWhichTown</title>
-  <meta name="description" content="WhichBandWhichTown has temporarily suspended services due to hitting the JamBase API request limit.">
-  
+  <meta name="description"
+    content="WhichBandWhichTown has temporarily suspended services due to hitting the JamBase API request limit.">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <main class="container">
     <article class="card">
-      
+
       <!-- Visual Warning Indicator -->
       <div class="meter-icon" aria-hidden="true">
         <div class="beacon"></div>
@@ -27,7 +31,8 @@
         </svg>
         <div class="warning-indicator">
           <!-- Exclamation icon SVG -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 9v4M12 17h.01" />
           </svg>
         </div>
@@ -35,20 +40,14 @@
 
       <!-- Core Message -->
       <h1 class="title">
-        <span class="highlight">whichbandwhichtown</span> has hit its API limit with <a href="https://data.jambase.com/pricing" class="inline-link" target="_blank" rel="noopener">Jambase</a>
+        <span class="highlight">whichbandwhichtown</span> has hit its API limit with <a
+          href="https://data.jambase.com/pricing" class="inline-link" target="_blank" rel="noopener">Jambase</a>
       </h1>
 
       <p class="description">
-        We have temporarily exceeded our monthly rate limit. Services will automatically resume when our API quota resets.
+        We have temporarily exceeded our monthly API limit. Services will automatically resume when our API quota
+        resets.
       </p>
-
-      <!-- CTA / Action Link -->
-      <a href="https://data.jambase.com/pricing" class="cta-button" target="_blank" rel="noopener">
-        <span>View JamBase Pricing</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
 
       <!-- Subtle status -->
       <footer class="footer-text">
@@ -57,4 +56,5 @@
     </article>
   </main>
 </body>
+
 </html>
