@@ -16,6 +16,10 @@
   --text-primary: hsl(0, 0%, 98%);
   --text-muted: hsl(215, 20%, 65%);
   --text-link-hover: hsl(38, 92%, 50%);
+
+  /* Font Families */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* --- Base Styles --- */
@@ -32,7 +36,7 @@ html, body {
 }
 
 body {
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   display: grid;
@@ -159,7 +163,7 @@ body::after {
 
 /* --- Typography --- */
 .title {
-  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 5cqi, 2.25rem);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -197,7 +201,7 @@ body::after {
 }
 
 .description {
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
   font-size: 1.05rem;
   color: var(--text-muted);
   font-weight: 400;
@@ -205,9 +209,53 @@ body::after {
   margin-block-start: -0.5rem;
 }
 
+/* --- Premium Link / CTA Button --- */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.cta-button:hover, .cta-button:focus-visible {
+  border-color: var(--color-warning);
+  color: var(--text-link-hover);
+  background: hsla(38, 92%, 50%, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px hsla(38, 92%, 50%, 0.15);
+  outline: none;
+}
+
+.cta-button:focus-visible {
+  outline: 2px solid var(--color-warning);
+  outline-offset: 4px;
+}
+
+.cta-button svg {
+  inline-size: 16px;
+  block-size: 16px;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover svg {
+  transform: translateX(4px);
+}
+
 /* --- Footer Info --- */
 .footer-text {
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: hsla(215, 20%, 65%, 0.4);
   margin-block-start: 1rem;
